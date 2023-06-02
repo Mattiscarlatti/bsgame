@@ -120,7 +120,6 @@ state aaaa bbbb = do
     takeBishop aaaa
     positionBishop aaaa bbbb
 
-
 {--
 playMove :: World ()
 playMove = do
@@ -134,20 +133,20 @@ playMove = do
         print (evalInput3 choice2)   
 --}
 
-playMove :: String -> String -> Game -> IO ()
+playMove :: String -> String -> Game -> StateT Game IO ()
 playMove o p q = do
     newBoard <- return (gBoard (snd (runState (state o p) q)))
-    putStrLn (printBoard (newBoard))
-    -- qqq <- get
-    choice21 <- chooseBishop
-    choice22 <- moveBishopTo
-    playMove choice21 choice22 (snd (runState (state choice21 choice22) q))
+    liftIO $ putStrLn (printBoard (newBoard))
+    qqq <- get
+    liftIO $ do 
+       choice21 <- chooseBishop
+       choice22 <- moveBishopTo
+       print (evalInput choice21)
+       playMove choice21 choice22 (snd (runState (state choice21 choice22) qqq))
+--    print (evalInput2 choice21)   
+--    print (evalInput choice22)
+--    print (evalInput3 choice22)   
 --    print (decideColorBishop choice1 game)
---    print (evalInput choice1)
---    print (evalInput2 choice1)   
---    print (evalInput choice2)
---    print (evalInput3 choice2)   
-
 
 main :: IO ()
 main = do
