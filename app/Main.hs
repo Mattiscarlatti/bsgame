@@ -133,31 +133,32 @@ playMove = do
         print (evalInput choice2)
         print (evalInput3 choice2)   
 --}
-{--
-playMove :: IO ()
-playMove = do
-    game <- return (mkGame)
-    choice1 <- chooseBishop
-    choice2 <- moveBishopTo
-    print (evalInput choice1)
-    print (evalInput2 choice1)   
-    print (evalInput choice2)
-    print (evalInput3 choice2)   
---}
+
+playMove :: String -> String -> Game -> IO ()
+playMove o p q = do
+    newBoard <- return (gBoard (snd (runState (state o p) q)))
+    putStrLn (printBoard (newBoard))
+    -- qqq <- get
+    choice21 <- chooseBishop
+    choice22 <- moveBishopTo
+    playMove choice21 choice22 (snd (runState (state choice21 choice22) q))
+--    print (decideColorBishop choice1 game)
+--    print (evalInput choice1)
+--    print (evalInput2 choice1)   
+--    print (evalInput choice2)
+--    print (evalInput3 choice2)   
+
 
 main :: IO ()
 main = do
     setup
     game <- return (mkGame)
+    choice11 <- chooseBishop
+    choice12 <- moveBishopTo
+    return (snd (runState (state choice11 choice12) game))
+    playMove choice11 choice12 game
     --state <- return (firstField (firstRow (gBoard game)))
     --print (state)
-    choice1 <- chooseBishop
-    choice2 <- moveBishopTo
-    newBoard <- return (gBoard (snd (runState (state choice1 choice2) game)))
-    putStrLn (printBoard (newBoard))
-    print (decideColorBishop choice1 game)
-    --print (evalInput choice1)
-    --print (evalInput choice2)
     --runStateT (runExceptT playMove "error") game
     return ()
 
