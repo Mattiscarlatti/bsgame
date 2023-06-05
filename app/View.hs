@@ -1,13 +1,13 @@
 module View where
 
-import System.Console.ANSI ( clearScreen )
+--import System.Console.ANSI ( clearScreen )
 
 type Row = [Field]
 type Column = [Field]
 type Board = [Row]
 
 data Game = CGame { gBoard :: Board }
-  deriving Show
+  deriving (Eq, Show)
 data Field = CField { gp1 :: String, gp2 :: String, gp3 :: String, gp4 :: String, gp5 :: String, gp6 :: String, gp7 :: String }
   deriving (Eq, Show)
 
@@ -26,6 +26,9 @@ we = CField "              |" "              |" "              |" "             
 
 mkGame :: Game
 mkGame = CGame { gBoard = _StartBoard }
+
+mkGame2 :: Game
+mkGame2 = CGame { gBoard = [[we, be, we, be], [bb, wb, bb, wb], [be, we, be, we], [bw, ww, bw, ww], [we, be, we, be]] }
 
 firstRow :: Board -> Row
 firstRow a = head (a)
@@ -96,7 +99,7 @@ _StartBoard = [[bb, wb, bb, wb], [we, be, we, be], [be, we, be, we], [we, be, we
 
 setup :: IO ()
 setup = do 
-    clearScreen
+--    clearScreen
     putStrLn ("                                                                 ")
     putStrLn ("              Welcome, Player, to the BISHOP SWAP GAME!          ")
     putStrLn (printBoard _StartBoard)
