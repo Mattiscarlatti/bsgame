@@ -157,23 +157,8 @@ positionBishop uuuu vvvv ssss = do
                                    _ -> mkGame2
                             _ -> mkGame2
 
-{--
-playMove :: World ()
-playMove = do
-    game <- return (mkGame)
-    liftIO $ do
-        choice1 <- chooseBishop
-        choice2 <- moveBishopTo
-        print (evalInput choice1)
-        print (evalInput2 choice1)   
-        print (evalInput choice2)
-        print (evalInput3 choice2)   
---}
-
 playMove :: StateT Game IO ()
 playMove = do
-    --newBoard <- return (gBoard (snd (runState (state o p) q)))
-    --liftIO $ putStrLn (printBoard (newBoard))
     qqq1 <- get
     choice1 <- liftIO $ chooseBishop
     sss <- return (chosenField choice1 qqq1)
@@ -184,8 +169,6 @@ playMove = do
     qqq3 <- get
     liftIO $ putStrLn (printBoard (gBoard qqq3))
     playMove
-    
-    --playMove choice21 choice22 (snd (runState (state choice21 choice22) qqq))
     --liftIO $ print (evalInput choice21)
     --print (evalInput2 choice21)   
     --print (evalInput choice22)
@@ -196,14 +179,8 @@ main :: IO ()
 main = do
     setup
     game <- return (mkGame)
-    --choice11 <- chooseBishop
-    --choice12 <- moveBishopTo
---    return $! (snd (runState (state choice11 choice12) $! game))
---    playMove choice11 choice12 game
     runStateT playMove game
     --putStrLn (printBoard (updateBoard choice11 (updateRow choice11 (chosenField choice12 game) (chosenRow choice12 game)) (gBoard game)))
-    --state <- return (firstField (firstRow (gBoard game)))
-    --print (state)
     --runStateT (runExceptT playMove "error") game
     return ()
 
