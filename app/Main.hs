@@ -122,38 +122,38 @@ takeBishop uu vv = do
                                    _ -> mkGame2
                             _ -> mkGame2
 
-positionBishop :: String -> String -> Game -> Game
+positionBishop :: String -> Field -> Game -> Game
 positionBishop uuuu vvvv ssss = do 
-    case head (tail (vvvv)) of 
-                            '5' -> case head (vvvv) of 
-                                   'A' -> CGame { gBoard = (((chosenField uuuu ssss) : (secondField (firstRow (gBoard ssss))) : (thirdField (firstRow (gBoard ssss))) : (fourthField (firstRow (gBoard ssss))) : []) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
-                                   'B' -> CGame { gBoard = (((firstField (firstRow (gBoard ssss))) : (chosenField uuuu ssss) : (thirdField (firstRow (gBoard ssss))) : (fourthField (firstRow (gBoard ssss))) : []) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
-                                   'C' -> CGame { gBoard = (((firstField (firstRow (gBoard ssss))) : (secondField (firstRow (gBoard ssss))) : (chosenField uuuu ssss) : (fourthField (firstRow (gBoard ssss))) : []) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
-                                   'D' -> CGame { gBoard = (((firstField (firstRow (gBoard ssss))) : (secondField (firstRow (gBoard ssss))) : (thirdField (firstRow (gBoard ssss))) : (chosenField uuuu ssss) : []) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+    case head (tail (uuuu)) of 
+                            '5' -> case head (uuuu) of 
+                                   'A' -> CGame { gBoard = (((vvvv) : (secondField (firstRow (gBoard ssss))) : (thirdField (firstRow (gBoard ssss))) : (fourthField (firstRow (gBoard ssss))) : []) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+                                   'B' -> CGame { gBoard = (((firstField (firstRow (gBoard ssss))) : (vvvv) : (thirdField (firstRow (gBoard ssss))) : (fourthField (firstRow (gBoard ssss))) : []) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+                                   'C' -> CGame { gBoard = (((firstField (firstRow (gBoard ssss))) : (secondField (firstRow (gBoard ssss))) : (vvvv) : (fourthField (firstRow (gBoard ssss))) : []) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+                                   'D' -> CGame { gBoard = (((firstField (firstRow (gBoard ssss))) : (secondField (firstRow (gBoard ssss))) : (thirdField (firstRow (gBoard ssss))) : (vvvv) : []) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
                                    _ -> mkGame2
-                            '4' -> case head (vvvv) of 
-                                   'A' -> CGame { gBoard = ((firstRow (gBoard ssss)) : ((chosenField uuuu ssss) : (secondField (secondRow (gBoard ssss))) : (thirdField (secondRow (gBoard ssss))) : (fourthField (secondRow (gBoard ssss))) : []) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
-                                   'B' -> CGame { gBoard = ((firstRow (gBoard ssss)) : ((firstField (secondRow (gBoard ssss))) : (chosenField uuuu ssss) : (thirdField (secondRow (gBoard ssss))) : (fourthField (secondRow (gBoard ssss))) : []) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
-                                   'C' -> CGame { gBoard = ((firstRow (gBoard ssss)) : ((firstField (secondRow (gBoard ssss))) : (secondField (secondRow (gBoard ssss))) : (chosenField uuuu ssss) : (fourthField (secondRow (gBoard ssss))) : []) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
-                                   'D' -> CGame { gBoard = ((firstRow (gBoard ssss)) : ((firstField (secondRow (gBoard ssss))) : (secondField (secondRow (gBoard ssss))) : (thirdField (secondRow (gBoard ssss))) : (chosenField uuuu ssss) : []) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+                            '4' -> case head (uuuu) of 
+                                   'A' -> CGame { gBoard = ((firstRow (gBoard ssss)) : ((vvvv) : (secondField (secondRow (gBoard ssss))) : (thirdField (secondRow (gBoard ssss))) : (fourthField (secondRow (gBoard ssss))) : []) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+                                   'B' -> CGame { gBoard = ((firstRow (gBoard ssss)) : ((firstField (secondRow (gBoard ssss))) : (vvvv) : (thirdField (secondRow (gBoard ssss))) : (fourthField (secondRow (gBoard ssss))) : []) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+                                   'C' -> CGame { gBoard = ((firstRow (gBoard ssss)) : ((firstField (secondRow (gBoard ssss))) : (secondField (secondRow (gBoard ssss))) : (vvvv) : (fourthField (secondRow (gBoard ssss))) : []) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+                                   'D' -> CGame { gBoard = ((firstRow (gBoard ssss)) : ((firstField (secondRow (gBoard ssss))) : (secondField (secondRow (gBoard ssss))) : (thirdField (secondRow (gBoard ssss))) : (vvvv) : []) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
                                    _ -> mkGame2
-                            '3' -> case head (vvvv) of 
-                                   'A' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : ((chosenField uuuu ssss) : (secondField (thirdRow (gBoard ssss))) : (thirdField (thirdRow (gBoard ssss))) : (fourthField (thirdRow (gBoard ssss))) : []) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
-                                   'B' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : ((firstField (thirdRow (gBoard ssss))) : (chosenField uuuu ssss) : (thirdField (thirdRow (gBoard ssss))) : (fourthField (thirdRow (gBoard ssss))) : []) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
-                                   'C' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : ((firstField (thirdRow (gBoard ssss))) : (secondField (thirdRow (gBoard ssss))) : (chosenField uuuu ssss) : (fourthField (thirdRow (gBoard ssss))) : []) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
-                                   'D' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : ((firstField (thirdRow (gBoard ssss))) : (secondField (thirdRow (gBoard ssss))) : (thirdField (thirdRow (gBoard ssss))) : (chosenField uuuu ssss) : []) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+                            '3' -> case head (uuuu) of 
+                                   'A' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : ((vvvv) : (secondField (thirdRow (gBoard ssss))) : (thirdField (thirdRow (gBoard ssss))) : (fourthField (thirdRow (gBoard ssss))) : []) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+                                   'B' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : ((firstField (thirdRow (gBoard ssss))) : (vvvv) : (thirdField (thirdRow (gBoard ssss))) : (fourthField (thirdRow (gBoard ssss))) : []) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+                                   'C' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : ((firstField (thirdRow (gBoard ssss))) : (secondField (thirdRow (gBoard ssss))) : (vvvv) : (fourthField (thirdRow (gBoard ssss))) : []) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
+                                   'D' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : ((firstField (thirdRow (gBoard ssss))) : (secondField (thirdRow (gBoard ssss))) : (thirdField (thirdRow (gBoard ssss))) : (vvvv) : []) : (fourthRow (gBoard ssss)) : (fifthRow (gBoard ssss)) : []) }
                                    _ -> mkGame2
-                            '2' -> case head (vvvv) of 
-                                   'A' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : ((chosenField uuuu ssss) : (secondField (fourthRow (gBoard ssss))) : (thirdField (fourthRow (gBoard ssss))) : (fourthField (fourthRow (gBoard ssss))) : []) : (fifthRow (gBoard ssss)) : []) }
-                                   'B' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : ((firstField (fourthRow (gBoard ssss))) : (chosenField uuuu ssss) : (thirdField (fourthRow (gBoard ssss))) : (fourthField (fourthRow (gBoard ssss))) : []) : (fifthRow (gBoard ssss)) : []) }
-                                   'C' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : ((firstField (fourthRow (gBoard ssss))) : (secondField (fourthRow (gBoard ssss))) : (chosenField uuuu ssss) : (fourthField (fourthRow (gBoard ssss))) : []) : (fifthRow (gBoard ssss)) : []) }
-                                   'D' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : ((firstField (fourthRow (gBoard ssss))) : (secondField (fourthRow (gBoard ssss))) : (thirdField (fourthRow (gBoard ssss))) : (chosenField uuuu ssss) : []) : (fifthRow (gBoard ssss)) : []) }
+                            '2' -> case head (uuuu) of 
+                                   'A' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : ((vvvv) : (secondField (fourthRow (gBoard ssss))) : (thirdField (fourthRow (gBoard ssss))) : (fourthField (fourthRow (gBoard ssss))) : []) : (fifthRow (gBoard ssss)) : []) }
+                                   'B' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : ((firstField (fourthRow (gBoard ssss))) : (vvvv) : (thirdField (fourthRow (gBoard ssss))) : (fourthField (fourthRow (gBoard ssss))) : []) : (fifthRow (gBoard ssss)) : []) }
+                                   'C' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : ((firstField (fourthRow (gBoard ssss))) : (secondField (fourthRow (gBoard ssss))) : (vvvv) : (fourthField (fourthRow (gBoard ssss))) : []) : (fifthRow (gBoard ssss)) : []) }
+                                   'D' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : ((firstField (fourthRow (gBoard ssss))) : (secondField (fourthRow (gBoard ssss))) : (thirdField (fourthRow (gBoard ssss))) : (vvvv) : []) : (fifthRow (gBoard ssss)) : []) }
                                    _ -> mkGame2
-                            '1' -> case head (vvvv) of 
-                                   'A' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : ((chosenField uuuu ssss) : (secondField (fifthRow (gBoard ssss))) : (thirdField (fifthRow (gBoard ssss))) : (fourthField (fifthRow (gBoard ssss))) : []) : []) }
-                                   'B' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : ((firstField (fifthRow (gBoard ssss))) : (chosenField uuuu ssss) : (thirdField (fifthRow (gBoard ssss))) : (fourthField (fifthRow (gBoard ssss))) : []) : []) }
-                                   'C' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : ((firstField (fifthRow (gBoard ssss))) : (secondField (fifthRow (gBoard ssss))) : (chosenField uuuu ssss) : (fourthField (fifthRow (gBoard ssss))) : []) : []) }
-                                   'D' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : ((firstField (fifthRow (gBoard ssss))) : (secondField (fifthRow (gBoard ssss))) : (thirdField (fifthRow (gBoard ssss))) : (chosenField uuuu ssss) : []) : []) }
+                            '1' -> case head (uuuu) of 
+                                   'A' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : ((vvvv) : (secondField (fifthRow (gBoard ssss))) : (thirdField (fifthRow (gBoard ssss))) : (fourthField (fifthRow (gBoard ssss))) : []) : []) }
+                                   'B' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : ((firstField (fifthRow (gBoard ssss))) : (vvvv) : (thirdField (fifthRow (gBoard ssss))) : (fourthField (fifthRow (gBoard ssss))) : []) : []) }
+                                   'C' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : ((firstField (fifthRow (gBoard ssss))) : (secondField (fifthRow (gBoard ssss))) : (vvvv) : (fourthField (fifthRow (gBoard ssss))) : []) : []) }
+                                   'D' -> CGame { gBoard = ((firstRow (gBoard ssss)) : (secondRow (gBoard ssss)) : (thirdRow (gBoard ssss)) : (fourthRow (gBoard ssss)) : ((firstField (fifthRow (gBoard ssss))) : (secondField (fifthRow (gBoard ssss))) : (thirdField (fifthRow (gBoard ssss))) : (vvvv) : []) : []) }
                                    _ -> mkGame2
                             _ -> mkGame2
 
@@ -176,14 +176,15 @@ playMove = do
     --liftIO $ putStrLn (printBoard (newBoard))
     qqq1 <- get
     choice1 <- liftIO $ chooseBishop
+    sss <- return (chosenField choice1 qqq1)
     modify (\x -> (takeBishop choice1 qqq1))
     qqq2 <- get
     choice2 <- liftIO $ moveBishopTo
-    modify (\x -> (positionBishop choice1 choice2 qqq2))
+    modify (\x -> (positionBishop choice2 sss qqq2))
     qqq3 <- get
     liftIO $ putStrLn (printBoard (gBoard qqq3))
     playMove
-    --sss <- return (chosenRow choice1 qqq)
+    
     --playMove choice21 choice22 (snd (runState (state choice21 choice22) qqq))
     --liftIO $ print (evalInput choice21)
     --print (evalInput2 choice21)   
