@@ -1,7 +1,7 @@
 module Main where
 
 import Data.List ()
-import Data.Char ( toUpper, digitToInt )
+import Data.Char ( toUpper )
 import Data.Either ()
 import System.IO ()
 --import System.Console.ANSI ( clearScreen )
@@ -37,54 +37,54 @@ chosenRow rt st = case head (tail (rt)) of
 --}
 
 chosenField :: String -> Game -> Field
-chosenField uuu vvv = case (head (tail (fmap toUpper uuu))) of
-                            '5' -> case (head (fmap toUpper uuu)) of 
-                                   'A' -> if ((firstField (firstRow (gBoard vvv))) == bb) then bb else if ((firstField (firstRow (gBoard vvv))) == bw) then bw else if ((firstField (firstRow (gBoard vvv))) == wb) then wb else ww
-                                   'B' -> if ((secondField (firstRow (gBoard vvv))) == bb) then bb else if ((secondField (firstRow (gBoard vvv))) == bw) then bw else if ((secondField (firstRow (gBoard vvv))) == wb) then wb else ww
-                                   'C' -> if ((thirdField (firstRow (gBoard vvv))) == bb) then bb else if ((thirdField (firstRow (gBoard vvv))) == bw) then bw else if ((thirdField (firstRow (gBoard vvv))) == wb) then wb else ww
-                                   'D' -> if ((fourthField (firstRow (gBoard vvv))) == bb) then bb else if ((fourthField (firstRow (gBoard vvv))) == bw) then bw else if ((fourthField (firstRow (gBoard vvv))) == wb) then wb else ww
+chosenField uuu vvv = case head (tail (uuu)) of
+                            '5' -> case head (uuu) of 
+                                   'A' -> if ((firstField (firstRow (gBoard vvv))) == bb) then bb else if ((firstField (firstRow (gBoard vvv))) == bw) then bw else if ((firstField (firstRow (gBoard vvv))) == wb) then wb else if ((firstField (firstRow (gBoard vvv))) == ww) then ww else if ((firstField (firstRow (gBoard vvv))) == we) then we else be
+                                   'B' -> if ((secondField (firstRow (gBoard vvv))) == bb) then bb else if ((secondField (firstRow (gBoard vvv))) == bw) then bw else if ((secondField (firstRow (gBoard vvv))) == wb) then wb else if ((secondField (firstRow (gBoard vvv))) == ww) then ww else if ((secondField (firstRow (gBoard vvv))) == we) then we else be
+                                   'C' -> if ((thirdField (firstRow (gBoard vvv))) == bb) then bb else if ((thirdField (firstRow (gBoard vvv))) == bw) then bw else if ((thirdField (firstRow (gBoard vvv))) == wb) then wb else if ((thirdField (firstRow (gBoard vvv))) == ww) then ww else if ((thirdField (firstRow (gBoard vvv))) == we) then we else be
+                                   'D' -> if ((fourthField (firstRow (gBoard vvv))) == bb) then bb else if ((fourthField (firstRow (gBoard vvv))) == bw) then bw else if ((fourthField (firstRow (gBoard vvv))) == wb) then wb else if ((fourthField (firstRow (gBoard vvv))) == ww) then ww else if ((fourthField (firstRow (gBoard vvv))) == we) then we else be
                                    _ -> bb
                             '4' -> case head (uuu) of 
-                                   'A' -> if ((firstField (secondRow (gBoard vvv))) == bb) then bb else if ((firstField (secondRow (gBoard vvv))) == bw) then bw else if ((firstField (secondRow (gBoard vvv))) == wb) then wb else ww
-                                   'B' -> if ((secondField (secondRow (gBoard vvv))) == bb) then bb else if ((secondField (secondRow (gBoard vvv))) == bw) then bw else if ((secondField (secondRow (gBoard vvv))) == wb) then wb else ww
-                                   'C' -> if ((thirdField (secondRow (gBoard vvv))) == bb) then bb else if ((thirdField (secondRow (gBoard vvv))) == bw) then bw else if ((thirdField (secondRow (gBoard vvv))) == wb) then wb else ww
-                                   'D' -> if ((fourthField (secondRow (gBoard vvv))) == bb) then bb else if ((fourthField (secondRow (gBoard vvv))) == bw) then bw else if ((fourthField (secondRow (gBoard vvv))) == wb) then wb else ww
+                                   'A' -> if ((firstField (secondRow (gBoard vvv))) == bb) then bb else if ((firstField (secondRow (gBoard vvv))) == bw) then bw else if ((firstField (secondRow (gBoard vvv))) == wb) then wb else if ((firstField (secondRow (gBoard vvv))) == ww) then ww else if ((firstField (secondRow (gBoard vvv))) == we) then we else be
+                                   'B' -> if ((secondField (secondRow (gBoard vvv))) == bb) then bb else if ((secondField (secondRow (gBoard vvv))) == bw) then bw else if ((secondField (secondRow (gBoard vvv))) == wb) then wb else if ((secondField (secondRow (gBoard vvv))) == ww) then ww else if ((secondField (secondRow (gBoard vvv))) == we) then we else be
+                                   'C' -> if ((thirdField (secondRow (gBoard vvv))) == bb) then bb else if ((thirdField (secondRow (gBoard vvv))) == bw) then bw else if ((thirdField (secondRow (gBoard vvv))) == wb) then wb else if ((thirdField (secondRow (gBoard vvv))) == ww) then ww else if ((thirdField (secondRow (gBoard vvv))) == we) then we else be
+                                   'D' -> if ((fourthField (secondRow (gBoard vvv))) == bb) then bb else if ((fourthField (secondRow (gBoard vvv))) == bw) then bw else if ((fourthField (secondRow (gBoard vvv))) == wb) then wb else if ((fourthField (secondRow (gBoard vvv))) == ww) then ww else if ((fourthField (secondRow (gBoard vvv))) == we) then we else be
                                    _ -> bb
                             '3' -> case head (uuu) of 
-                                   'A' -> if ((firstField (thirdRow (gBoard vvv))) == bb) then bb else if ((firstField (thirdRow (gBoard vvv))) == bw) then bw else if ((firstField (thirdRow (gBoard vvv))) == wb) then wb else ww
-                                   'B' -> if ((secondField (thirdRow (gBoard vvv))) == bb) then bb else if ((secondField (thirdRow (gBoard vvv))) == bw) then bw else if ((secondField (thirdRow (gBoard vvv))) == wb) then wb else ww
-                                   'C' -> if ((thirdField (thirdRow (gBoard vvv))) == bb) then bb else if ((thirdField (thirdRow (gBoard vvv))) == bw) then bw else if ((thirdField (thirdRow (gBoard vvv))) == wb) then wb else ww
-                                   'D' -> if ((fourthField (thirdRow (gBoard vvv))) == bb) then bb else if ((fourthField (thirdRow (gBoard vvv))) == bw) then bw else if ((fourthField (thirdRow (gBoard vvv))) == wb) then wb else ww
+                                   'A' -> if ((firstField (thirdRow (gBoard vvv))) == bb) then bb else if ((firstField (thirdRow (gBoard vvv))) == bw) then bw else if ((firstField (thirdRow (gBoard vvv))) == wb) then wb else if ((firstField (thirdRow (gBoard vvv))) == ww) then ww else if ((firstField (thirdRow (gBoard vvv))) == we) then we else be
+                                   'B' -> if ((secondField (thirdRow (gBoard vvv))) == bb) then bb else if ((secondField (thirdRow (gBoard vvv))) == bw) then bw else if ((secondField (thirdRow (gBoard vvv))) == wb) then wb else if ((secondField (thirdRow (gBoard vvv))) == ww) then ww else if ((secondField (thirdRow (gBoard vvv))) == we) then we else be
+                                   'C' -> if ((thirdField (thirdRow (gBoard vvv))) == bb) then bb else if ((thirdField (thirdRow (gBoard vvv))) == bw) then bw else if ((thirdField (thirdRow (gBoard vvv))) == wb) then wb else if ((thirdField (thirdRow (gBoard vvv))) == ww) then ww else if ((thirdField (thirdRow (gBoard vvv))) == we) then we else be
+                                   'D' -> if ((fourthField (thirdRow (gBoard vvv))) == bb) then bb else if ((fourthField (thirdRow (gBoard vvv))) == bw) then bw else if ((fourthField (thirdRow (gBoard vvv))) == wb) then wb else if ((fourthField (thirdRow (gBoard vvv))) == ww) then ww else if ((fourthField (thirdRow (gBoard vvv))) == we) then we else be
                                    _ -> bb
                             '2' -> case head (uuu) of 
-                                   'A' -> if ((firstField (fourthRow (gBoard vvv))) == bb) then bb else if ((firstField (fourthRow (gBoard vvv))) == bw) then bw else if ((firstField (fourthRow (gBoard vvv))) == wb) then wb else ww
-                                   'B' -> if ((secondField (fourthRow (gBoard vvv))) == bb) then bb else if ((secondField (fourthRow (gBoard vvv))) == bw) then bw else if ((secondField (fourthRow (gBoard vvv))) == wb) then wb else ww
-                                   'C' -> if ((thirdField (fourthRow (gBoard vvv))) == bb) then bb else if ((thirdField (fourthRow (gBoard vvv))) == bw) then bw else if ((thirdField (fourthRow (gBoard vvv))) == wb) then wb else ww
-                                   'D' -> if ((fourthField (fourthRow (gBoard vvv))) == bb) then bb else if ((fourthField (fourthRow (gBoard vvv))) == bw) then bw else if ((fourthField (fourthRow (gBoard vvv))) == wb) then wb else ww
+                                   'A' -> if ((firstField (fourthRow (gBoard vvv))) == bb) then bb else if ((firstField (fourthRow (gBoard vvv))) == bw) then bw else if ((firstField (fourthRow (gBoard vvv))) == wb) then wb else if ((firstField (fourthRow (gBoard vvv))) == ww) then ww else if ((firstField (fourthRow (gBoard vvv))) == we) then we else be
+                                   'B' -> if ((secondField (fourthRow (gBoard vvv))) == bb) then bb else if ((secondField (fourthRow (gBoard vvv))) == bw) then bw else if ((secondField (fourthRow (gBoard vvv))) == wb) then wb else if ((secondField (fourthRow (gBoard vvv))) == ww) then ww else if ((secondField (fourthRow (gBoard vvv))) == we) then we else be
+                                   'C' -> if ((thirdField (fourthRow (gBoard vvv))) == bb) then bb else if ((thirdField (fourthRow (gBoard vvv))) == bw) then bw else if ((thirdField (fourthRow (gBoard vvv))) == wb) then wb else if ((thirdField (fourthRow (gBoard vvv))) == ww) then ww else if ((thirdField (fourthRow (gBoard vvv))) == we) then we else be
+                                   'D' -> if ((fourthField (fourthRow (gBoard vvv))) == bb) then bb else if ((fourthField (fourthRow (gBoard vvv))) == bw) then bw else if ((fourthField (fourthRow (gBoard vvv))) == wb) then wb else if ((fourthField (fourthRow (gBoard vvv))) == ww) then ww else if ((fourthField (fourthRow (gBoard vvv))) == we) then we else be
                                    _ -> bb
                             '1' -> case head (uuu) of 
-                                   'A' -> if ((firstField (fifthRow (gBoard vvv))) == bb) then bb else if ((firstField (fifthRow (gBoard vvv))) == bw) then bw else if ((firstField (fifthRow (gBoard vvv))) == wb) then wb else ww
-                                   'B' -> if ((secondField (fifthRow (gBoard vvv))) == bb) then bb else if ((secondField (fifthRow (gBoard vvv))) == bw) then bw else if ((secondField (fifthRow (gBoard vvv))) == wb) then wb else ww
-                                   'C' -> if ((thirdField (fifthRow (gBoard vvv))) == bb) then bb else if ((thirdField (fifthRow (gBoard vvv))) == bw) then bw else if ((thirdField (fifthRow (gBoard vvv))) == wb) then wb else ww
-                                   'D' -> if ((fourthField (fifthRow (gBoard vvv))) == bb) then bb else if ((fourthField (fifthRow (gBoard vvv))) == bw) then bw else if ((fourthField (fifthRow (gBoard vvv))) == wb) then wb else ww
+                                   'A' -> if ((firstField (fifthRow (gBoard vvv))) == bb) then bb else if ((firstField (fifthRow (gBoard vvv))) == bw) then bw else if ((firstField (fifthRow (gBoard vvv))) == wb) then wb else if ((firstField (fifthRow (gBoard vvv))) == ww) then ww else if ((firstField (fifthRow (gBoard vvv))) == we) then we else be
+                                   'B' -> if ((secondField (fifthRow (gBoard vvv))) == bb) then bb else if ((secondField (fifthRow (gBoard vvv))) == bw) then bw else if ((secondField (fifthRow (gBoard vvv))) == wb) then wb else if ((secondField (fifthRow (gBoard vvv))) == ww) then ww else if ((secondField (fifthRow (gBoard vvv))) == we) then we else be
+                                   'C' -> if ((thirdField (fifthRow (gBoard vvv))) == bb) then bb else if ((thirdField (fifthRow (gBoard vvv))) == bw) then bw else if ((thirdField (fifthRow (gBoard vvv))) == wb) then wb else if ((thirdField (fifthRow (gBoard vvv))) == ww) then ww else if ((thirdField (fifthRow (gBoard vvv))) == we) then we else be
+                                   'D' -> if ((fourthField (fifthRow (gBoard vvv))) == bb) then bb else if ((fourthField (fifthRow (gBoard vvv))) == bw) then bw else if ((fourthField (fifthRow (gBoard vvv))) == wb) then wb else if ((fourthField (fifthRow (gBoard vvv))) == ww) then ww else if ((fourthField (fifthRow (gBoard vvv))) == we) then we else be
                                    _ -> bb
                             _ -> bb
 
 {--
 updateRow :: String -> Field -> Row -> Row
-updateRow ab cd ef = case ((digitToInt (head (ab)))-9) of
-       1 -> ((cd) : (secondField (ef)) : (thirdField (ef)) : (fourthField (ef)) : [])
-       2 -> ((firstField (ef)) : (cd) : (thirdField (ef)) : (fourthField (ef)) : [])
-       3 -> ((firstField (ef)) : (secondField (ef)) : (cd) : (fourthField (ef)) : [])
-       4 -> ((firstField (ef)) : (secondField (ef)) : (thirdField (ef)) : (cd) : [])
+updateRow ab cd ef = case head (ab) of
+       'A' -> ((cd) : (secondField (ef)) : (thirdField (ef)) : (fourthField (ef)) : [])
+       'B' -> ((firstField (ef)) : (cd) : (thirdField (ef)) : (fourthField (ef)) : [])
+       'C' -> ((firstField (ef)) : (secondField (ef)) : (cd) : (fourthField (ef)) : [])
+       'D' -> ((firstField (ef)) : (secondField (ef)) : (thirdField (ef)) : (cd) : [])
 
 updateBoard :: String -> Row -> Board -> Board
-updateBoard gh ji kl = case (read (show ((digitToInt ((head (tail (gh)))))))) of
-       5 -> ((ji) : (secondRow (kl)) : (thirdRow (kl)) : (fourthRow (kl)) : (fifthRow (kl)) : [])
-       4 -> ((firstRow (kl)) : (ji) : (thirdRow (kl)) : (fourthRow (kl)) : (fifthRow (kl)) : [])
-       3 -> ((firstRow (kl)) : (secondRow (kl)) : (ji) : (fourthRow (kl)) : (fifthRow (kl)) : [])
-       2 -> ((firstRow (kl)) : (secondRow (kl)) : (thirdRow (kl)) : (ji) : (fifthRow (kl)) : [])
-       1 -> ((firstRow (kl)) : (secondRow (kl)) : (thirdRow (kl)) : (fourthRow (kl)) : (ji) : [])
+updateBoard gh ji kl = case head (tail (gh)) of
+       '5' -> ((ji) : (secondRow (kl)) : (thirdRow (kl)) : (fourthRow (kl)) : (fifthRow (kl)) : [])
+       '4' -> ((firstRow (kl)) : (ji) : (thirdRow (kl)) : (fourthRow (kl)) : (fifthRow (kl)) : [])
+       '3' -> ((firstRow (kl)) : (secondRow (kl)) : (ji) : (fourthRow (kl)) : (fifthRow (kl)) : [])
+       '2' -> ((firstRow (kl)) : (secondRow (kl)) : (thirdRow (kl)) : (ji) : (fifthRow (kl)) : [])
+       '1' -> ((firstRow (kl)) : (secondRow (kl)) : (thirdRow (kl)) : (fourthRow (kl)) : (ji) : [])
 --}
 
 takeBishop :: String -> Game -> Game
@@ -157,6 +157,101 @@ positionBishop uuuu vvvv ssss = do
                                    _ -> mkGame2
                             _ -> mkGame2
 
+
+playMove :: World ()
+playMove = do
+    qqq1 <- get
+    choice1 <- liftIO $ chooseBishop
+    case ((evalInput1 choice1) == (Left "Invalid input.")) of 
+       True -> do
+              liftIO $ putStrLn "                                  "
+              liftIO $ putStrLn "**********Error Message***********"
+              liftIO $ putStrLn "Invalid input! Please, try again."
+              liftIO $ putStrLn "**********************************"
+              liftIO $ putStrLn "                                  "
+              playMove
+       False -> do
+              case ((evalInput2 choice1 qqq1) == (Left "Invalid input.")) of 
+                  True -> do
+                     liftIO $ putStrLn "                                                    "
+                     liftIO $ putStrLn "******************Error Message*********************"
+                     liftIO $ putStrLn "There is no bishop on this field! Please, try again."
+                     liftIO $ putStrLn "****************************************************"
+                     liftIO $ putStrLn "                                                    "
+                     playMove
+                  False -> do
+                     sss1 <- return (chosenField choice1 qqq1)
+                     modify (\x -> (takeBishop choice1 qqq1))
+                     qqq2 <- get
+                     choice2 <- liftIO $ moveBishopTo
+                     case ((evalInput1 choice2) == (Left "Invalid input.")) of 
+                            True -> do
+                                   liftIO $ putStrLn "                                  "
+                                   liftIO $ putStrLn "**********Error Message***********"
+                                   liftIO $ putStrLn "Invalid input! Please, try again."
+                                   liftIO $ putStrLn "**********************************"
+                                   liftIO $ putStrLn "                                  "
+                                   modify (\x -> (qqq1))
+                                   playMove
+                            False -> do
+                                   case ((evalInput3 choice2 qqq2) == (Left "Invalid input.")) of 
+                                       True -> do
+                                          liftIO $ putStrLn "                                                "
+                                          liftIO $ putStrLn "*****************Error Message******************"
+                                          liftIO $ putStrLn "Another Bishop on this field! Please, try again."
+                                          liftIO $ putStrLn "************************************************"
+                                          liftIO $ putStrLn "                                                "
+                                          modify (\x -> (qqq1))
+                                          playMove
+                                       False -> do
+                                          sss2 <- return (chosenField choice1 qqq2)
+                                          modify (\x -> (positionBishop choice2 sss1 qqq2))
+                                          qqq3 <- get
+                                          sss3 <- return (chosenField choice2 qqq3)
+                                          case ((evalInput4 choice2 sss3 qqq2) == (Left "Invalid input.")) of 
+                                                 True -> do
+                                                        liftIO $ putStrLn "                                                               "
+                                                        liftIO $ putStrLn "************************Error Message**************************"
+                                                        liftIO $ putStrLn "This field can't be accessed by this bishop! Please, try again."
+                                                        liftIO $ putStrLn "***************************************************************"
+                                                        liftIO $ putStrLn "                                                               "
+                                                        modify (\x -> (qqq1))
+                                                        playMove
+                                                 False -> do
+                                                        case ((evalInput5 sss1 sss2) == (Left "Invalid input.")) of 
+                                                               True -> do
+                                                                      liftIO $ putStrLn "                                                   "
+                                                                      liftIO $ putStrLn "******************Error Message********************"
+                                                                      liftIO $ putStrLn "A bishop can only move diagonal! Please, try again."
+                                                                      liftIO $ putStrLn "***************************************************"
+                                                                      liftIO $ putStrLn "                                                   "
+                                                                      modify (\x -> (qqq1))
+                                                                      playMove
+                                                               False -> do
+
+                                                                      modify (\x -> (positionBishop choice2 sss1 qqq3))
+                                                                      qqq4 <- get
+                                                                      --liftIO clearScreen
+                                                                      liftIO $ putStrLn (printBoard (gBoard qqq4))
+                                                                      case ((gBoard qqq3) == ([[bw, ww, bw, ww], [we, be, we, be], [be, we, be, we], [we, be, we, be], [bb, wb, bb, wb]])) of 
+                                                                             True -> liftIO $ putStrLn "Congratulations. You did it!"
+                                                                             False -> playMove
+                                                                      --liftIO $ print (evalInput choice21)
+                                                                      --print (evalInput2 choice21)   
+                                                                      --print (evalInput choice22)
+                                                                      --print (evalInput3 choice22)   
+                                                                      --print (decideColorBishop choice1 game)
+
+main :: IO ()
+main = do
+    setup
+    game <- return (mkGame)
+    runExceptT (runStateT playMove game)
+    --putStrLn (printBoard (updateBoard choice1 (updateRow choice1 (chosenField choice2 game) (chosenRow choice2 game)) (gBoard game)))
+    --runStateT (runExceptT playMove "error") game
+    return ()
+
+{--
 playMove :: StateT Game IO ()
 playMove = do
     qqq1 <- get
@@ -167,8 +262,11 @@ playMove = do
     choice2 <- liftIO $ moveBishopTo
     modify (\x -> (positionBishop choice2 sss qqq2))
     qqq3 <- get
+    --liftIO clearScreen
     liftIO $ putStrLn (printBoard (gBoard qqq3))
-    playMove
+    case ((gBoard qqq3) == ([[bw, ww, bw, ww], [we, be, we, be], [be, we, be, we], [we, be, we, be], [bb, wb, bb, wb]])) of 
+       True -> liftIO $ putStrLn "Congratulations. You did it!"
+       False -> playMove
     --liftIO $ print (evalInput choice21)
     --print (evalInput2 choice21)   
     --print (evalInput choice22)
@@ -180,7 +278,7 @@ main = do
     setup
     game <- return (mkGame)
     runStateT playMove game
-    --putStrLn (printBoard (updateBoard choice11 (updateRow choice11 (chosenField choice12 game) (chosenRow choice12 game)) (gBoard game)))
+    --putStrLn (printBoard (updateBoard choice1 (updateRow choice1 (chosenField choice2 game) (chosenRow choice2 game)) (gBoard game)))
     --runStateT (runExceptT playMove "error") game
     return ()
-
+--}
