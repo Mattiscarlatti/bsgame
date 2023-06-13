@@ -1,7 +1,18 @@
 module Evaluation where
 
+import Data.Char ( toUpper )
+import Data.Either ()
+import System.IO ()
+import System.Console.ANSI ( clearScreen )
+import Control.Monad.State ( State, StateT, runState, runStateT, liftIO, MonadState (get), put, modify )
+import Control.Monad.Trans.Except ( ExceptT, runExceptT )
+
 import View
 
+type Error = String
+type World a = StateT Game (ExceptT Error IO) a
+
+-- first check: has input only 2 characters? The first in the range of abcd and the second in the range of 12345?
 evalInput1 :: String -> Either String String
 evalInput1 j = do 
     if (length j == 2) then if 
@@ -10,6 +21,7 @@ evalInput1 j = do
         else Left "Invalid input."
     else Left "Invalid input."
  
+ -- second check: does the selected field actually have a bishop on it? 
 evalInput2 :: String -> Game -> Either String String
 evalInput2 n m = do
     case head (tail (n)) of
@@ -39,6 +51,7 @@ evalInput2 n m = do
                                    'C' -> if ((thirdField (firstRow (gBoard m))) == bb) || ((thirdField (firstRow (gBoard m))) == wb) || ((thirdField (firstRow (gBoard m))) == bw) || ((thirdField (firstRow (gBoard m))) == ww) then Right n else Left "Invalid input."
                                    'D' -> if ((fourthField (firstRow (gBoard m))) == bb) || ((fourthField (firstRow (gBoard m))) == wb) || ((fourthField (firstRow (gBoard m))) == bw) || ((fourthField (firstRow (gBoard m))) == ww) then Right n else Left "Invalid input."
 
+-- third check: is the new (move to) position actually empty (i.e. has no bishop on it)?
 evalInput3 :: String -> Game -> Either String String
 evalInput3 n m = do
     case head (tail (n)) of
@@ -68,6 +81,7 @@ evalInput3 n m = do
                                    'C' -> if ((thirdField (firstRow (gBoard m))) == be) || ((thirdField (firstRow (gBoard m))) == we) then Right n else Left "Invalid input."
                                    'D' -> if ((fourthField (firstRow (gBoard m))) == be) || ((fourthField (firstRow (gBoard m))) == we) then Right n else Left "Invalid input."
 
+-- fourth check: is the new (move to) position covered by the opposite color?
 evalInput4 :: String -> Field -> Game -> Either String String
 evalInput4 n o m = do 
            case ((o == bw) || (o == ww)) of
@@ -126,12 +140,47 @@ evalInput4 n o m = do
                                    'C' -> if (((firstField (thirdRow (gBoard m))) == bw) || ((secondField (secondRow (gBoard m))) == bw) || ((fourthField (secondRow (gBoard m))) == bw)) then Left "Invalid input." else Right n
                                    'D' -> if (((firstField (fourthRow (gBoard m))) == ww) || ((secondField (thirdRow (gBoard m))) == ww) || ((thirdField (secondRow (gBoard m))) == ww)) then Left "Invalid input." else Right n
 
-evalInput5 :: Field -> Field -> Either String String
+-- fifth check: does the bishop move diagonally?
+evalInput5 :: String -> String -> Either String String
 evalInput5 mn nm = do 
-       case mn of 
-              bb -> if (nm == be) then Right "OK" else Left "Invalid input."
-              bw -> if (nm == be) then Right "OK" else Left "Invalid input."
-              wb -> if (nm == we) then Right "OK" else Left "Invalid input."
-              ww -> if (nm == we) then Right "OK" else Left "Invalid input."
-              _ -> Left "Invalid input."
+       case head (tail (mn)) of
+                            '1' -> case head (mn) of 
+                                   'A' -> if (((fmap toUpper nm) == "B2") || ((fmap  toUpper nm) == "C3") || ((fmap  toUpper nm) == "D4")) then Right "OK" else Left "Invalid input."
+                                   'B' -> if (((fmap  toUpper nm) == "A2") || ((fmap  toUpper nm) == "C2") || ((fmap  toUpper nm) == "D3")) then Right "OK" else Left "Invalid input."
+                                   'C' -> if (((fmap  toUpper nm) == "A3") || ((fmap  toUpper nm) == "B2") || ((fmap  toUpper nm) == "D2")) then Right "OK" else Left "Invalid input."
+                                   'D' -> if (((fmap  toUpper nm) == "A4") || ((fmap  toUpper nm) == "B3") || ((fmap  toUpper nm) == "C2")) then Right "OK" else Left "Invalid input."
+                            '2' -> case head (mn) of 
+                                   'A' -> if (((fmap  toUpper nm) == "B1") || ((fmap  toUpper nm) == "B3") || ((fmap  toUpper nm) == "C4") || ((fmap  toUpper nm) == "D5")) then Right "OK" else Left "Invalid input."
+                                   'B' -> if (((fmap  toUpper nm) == "A1") || ((fmap  toUpper nm) == "A3") || ((fmap  toUpper nm) == "C1") || ((fmap  toUpper nm) == "C3") || ((fmap  toUpper nm) == "D4")) then Right "OK" else Left "Invalid input."
+                                   'C' -> if (((fmap  toUpper nm) == "A4") || ((fmap  toUpper nm) == "B1") || ((fmap  toUpper nm) == "B3") || ((fmap  toUpper nm) == "D1") || ((fmap  toUpper nm) == "D3")) then Right "OK" else Left "Invalid input."
+                                   'D' -> if (((fmap  toUpper nm) == "A5") || ((fmap  toUpper nm) == "B4") || ((fmap  toUpper nm) == "C3") || ((fmap  toUpper nm) == "C1")) then Right "OK" else Left "Invalid input."
+                            '3' -> case head (mn) of 
+                                   'A' -> if (((fmap  toUpper nm) == "B2") || ((fmap  toUpper nm) == "B4") || ((fmap  toUpper nm) == "C1") || ((fmap  toUpper nm) == "C5")) then Right "OK" else Left "Invalid input."
+                                   'B' -> if (((fmap  toUpper nm) == "A2") || ((fmap  toUpper nm) == "A4") || ((fmap  toUpper nm) == "C2") || ((fmap  toUpper nm) == "C4") || ((fmap  toUpper nm) == "D1") || ((fmap  toUpper nm) == "D5")) then Right "OK" else Left "Invalid input."
+                                   'C' -> if (((fmap  toUpper nm) == "A1") || ((fmap  toUpper nm) == "A5") || ((fmap  toUpper nm) == "B2") || ((fmap  toUpper nm) == "B4") || ((fmap  toUpper nm) == "D2") || ((fmap  toUpper nm) == "D4")) then Right "OK" else Left "Invalid input."
+                                   'D' -> if (((fmap  toUpper nm) == "B1") || ((fmap  toUpper nm) == "B5") || ((fmap  toUpper nm) == "C2") || ((fmap  toUpper nm) == "C4")) then Right "OK" else Left "Invalid input."
+                            '4' -> case head (mn) of 
+                                   'A' -> if (((fmap  toUpper nm) == "B3") || ((fmap  toUpper nm) == "B5") || ((fmap  toUpper nm) == "C2") || ((fmap  toUpper nm) == "D1")) then Right "OK" else Left "Invalid input."
+                                   'B' -> if (((fmap  toUpper nm) == "A3") || ((fmap  toUpper nm) == "A5") || ((fmap  toUpper nm) == "C3") || ((fmap  toUpper nm) == "C5") || ((fmap  toUpper nm) == "D2")) then Right "OK" else Left "Invalid input."
+                                   'C' -> if (((fmap  toUpper nm) == "A2") || ((fmap  toUpper nm) == "B3") || ((fmap  toUpper nm) == "B5") || ((fmap  toUpper nm) == "C3") || ((fmap  toUpper nm) == "C5")) then Right "OK" else Left "Invalid input."
+                                   'D' -> if (((fmap  toUpper nm) == "A1") || ((fmap  toUpper nm) == "B2") || ((fmap  toUpper nm) == "C3") || ((fmap  toUpper nm) == "C5")) then Right "OK" else Left "Invalid input."
+                            '5' -> case head (mn) of 
+                                   'A' -> if (((fmap  toUpper nm) == "B4") || ((fmap  toUpper nm) == "C3") || ((fmap  toUpper nm) == "D2")) then Right "OK" else Left "Invalid input."
+                                   'B' -> if (((fmap  toUpper nm) == "A4") || ((fmap  toUpper nm) == "C4") || ((fmap  toUpper nm) == "D3")) then Right "OK" else Left "Invalid input."
+                                   'C' -> if (((fmap  toUpper nm) == "A3") || ((fmap  toUpper nm) == "B4") || ((fmap  toUpper nm) == "D4")) then Right "OK" else Left "Invalid input."
+                                   'D' -> if (((fmap  toUpper nm) == "A2") || ((fmap  toUpper nm) == "B3") || ((fmap  toUpper nm) == "C4")) then Right "OK" else Left "Invalid input."
 
+giveErrorMessage :: String -> World ()
+giveErrorMessage qr = do
+       liftIO clearScreen
+       liftIO $ putStrLn "                                                                 "
+       liftIO $ putStrLn "*************************Error Message***************************"
+       liftIO $ putStrLn qr
+       liftIO $ putStrLn "                                                                 "
+       liftIO $ putStrLn " Press 'enter' key to continue..."
+       liftIO $ putStrLn "                                                                 "
+       liftIO $ putStrLn "*****************************************************************"
+       liftIO $ putStrLn "                                                                 "
+       liftIO $ getChar
+       liftIO $ return ()
+       liftIO clearScreen

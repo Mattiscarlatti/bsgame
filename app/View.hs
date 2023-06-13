@@ -1,6 +1,9 @@
 module View where
 
---import System.Console.ANSI ( clearScreen )
+import System.Console.ANSI ( clearScreen )
+
+data Field = CField { gp1 :: String, gp2 :: String, gp3 :: String, gp4 :: String, gp5 :: String, gp6 :: String, gp7 :: String }
+  deriving (Eq, Show)
 
 type Row = [Field]
 type Column = [Field]
@@ -8,11 +11,15 @@ type Board = [Row]
 
 data Game = CGame { gBoard :: Board }
   deriving (Eq, Show)
-data Field = CField { gp1 :: String, gp2 :: String, gp3 :: String, gp4 :: String, gp5 :: String, gp6 :: String, gp7 :: String }
-  deriving (Eq, Show)
 
 bb :: Field
-bb = CField "||||  __  |||||" "|||  (XX)  ||||" "||   <XX>   |||" "||   |XX|   |||" "|||  /XX   ||||" "||||      |||||" "-------------- "
+bb = CField "||||  __  |||||" 
+            "|||  (XX)  ||||" 
+            "||   <XX>   |||" 
+            "||   |XX|   |||" 
+            "|||  /XX   ||||" 
+            "||||      |||||" 
+            "-------------- "
 bw :: Field
 bw = CField "||||  __  |||||" "|||  (  )  ||||" "||   <  >   |||" "||   |  |   |||" "|||  /__   ||||" "||||      |||||" "-------------- "
 be :: Field
@@ -24,11 +31,15 @@ wb = CField "      __      |" "     (XX)     |" "     <XX>     |" "     |XX|    
 we :: Field
 we = CField "              |" "              |" "              |" "              |" "              |" "              |" "-------------- "
 
+_StartBoard :: Board
+_StartBoard = [[bb, wb, bb, wb], 
+               [we, be, we, be], 
+               [be, we, be, we], 
+               [we, be, we, be], 
+               [bw, ww, bw, ww]]
+
 mkGame :: Game
 mkGame = CGame { gBoard = _StartBoard }
-
-mkGame2 :: Game
-mkGame2 = CGame { gBoard = [[we, be, we, be], [bb, wb, bb, wb], [be, we, be, we], [bw, ww, bw, ww], [we, be, we, be]] }
 
 firstRow :: Board -> Row
 firstRow a = head (a)
@@ -94,12 +105,9 @@ printBoard zzz = do
              "                                                                 ",
              "                                                                 "]
 
-_StartBoard :: Board
-_StartBoard = [[bb, wb, bb, wb], [we, be, we, be], [be, we, be, we], [we, be, we, be], [bw, ww, bw, ww]]
-
 setup :: IO ()
 setup = do 
---    clearScreen
+    clearScreen
     putStrLn ("                                                                 ")
     putStrLn ("              Welcome, Player, to the BISHOP SWAP GAME!          ")
     putStrLn (printBoard _StartBoard)
