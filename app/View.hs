@@ -2,15 +2,11 @@ module View where
 
 import System.Console.ANSI ( clearScreen )
 
-data Field = CField { gp1 :: String, gp2 :: String, gp3 :: String, gp4 :: String, gp5 :: String, gp6 :: String, gp7 :: String }
-  deriving (Eq, Show)
-
+data Field = CField { gp1 :: String, gp2 :: String, gp3 :: String, gp4 :: String, gp5 :: String, gp6 :: String, gp7 :: String } deriving (Eq, Show)
 type Row = [Field]
-type Column = [Field]
 type Board = [Row]
+data Game = CGame { gBoard :: Board, gScore :: Int } deriving (Eq, Show)
 
-data Game = CGame { gBoard :: Board }
-  deriving (Eq, Show)
 
 bb :: Field
 bb = CField "||||  __  |||||" 
@@ -20,16 +16,51 @@ bb = CField "||||  __  |||||"
             "|||  /XX   ||||" 
             "||||      |||||" 
             "-------------- "
+
 bw :: Field
-bw = CField "||||  __  |||||" "|||  (  )  ||||" "||   <  >   |||" "||   |  |   |||" "|||  /__   ||||" "||||      |||||" "-------------- "
+bw = CField "||||  __  |||||"
+            "|||  (  )  ||||"
+            "||   <  >   |||"
+            "||   |  |   |||"
+            "|||  /__   ||||"
+            "||||      |||||"
+            "-------------- "
+
 be :: Field
-be = CField "|||||||||||||||" "|||||||||||||||" "|||||||||||||||" "|||||||||||||||" "|||||||||||||||" "|||||||||||||||" "-------------- "
+be = CField "|||||||||||||||" 
+            "|||||||||||||||"
+            "|||||||||||||||"
+            "|||||||||||||||"
+            "|||||||||||||||"
+            "|||||||||||||||"
+            "-------------- "
+
 ww :: Field
-ww = CField "      __      |" "     (  )     |" "     <  >     |" "     |  |     |" "     /__      |" "              |" "-------------- "
+ww = CField "      __      |"
+            "     (  )     |"
+            "     <  >     |"
+            "     |  |     |"
+            "     /__      |"
+            "              |"
+            "-------------- "
+
 wb :: Field
-wb = CField "      __      |" "     (XX)     |" "     <XX>     |" "     |XX|     |" "     /XX      |" "              |" "-------------- "
+wb = CField "      __      |"
+            "     (XX)     |"
+            "     <XX>     |"
+            "     |XX|     |"
+            "     /XX      |"
+            "              |"
+            "-------------- "
+
 we :: Field
-we = CField "              |" "              |" "              |" "              |" "              |" "              |" "-------------- "
+we = CField "              |"
+            "              |"
+            "              |"
+            "              |"
+            "              |"
+            "              |"
+            "-------------- "
 
 _StartBoard :: Board
 _StartBoard = [[bb, wb, bb, wb], 
@@ -39,7 +70,7 @@ _StartBoard = [[bb, wb, bb, wb],
                [bw, ww, bw, ww]]
 
 mkGame :: Game
-mkGame = CGame { gBoard = _StartBoard }
+mkGame = CGame { gBoard = _StartBoard, gScore = 0 }
 
 firstRow :: Board -> Row
 firstRow a = head (a)
@@ -102,7 +133,6 @@ printBoard zzz = do
              ("     " ++ (gp7 (firstField (fifthRow zzz))) ++ (gp7 (secondField (fifthRow zzz))) ++ (gp7 (thirdField (fifthRow zzz))) ++ (gp7 (fourthField (fifthRow zzz)))),
              "                                                                 ", 
              "            A              B              C              D       ", 
-             "                                                                 ",
              "                                                                 "]
 
 setup :: IO ()
@@ -111,6 +141,8 @@ setup = do
     putStrLn ("                                                                 ")
     putStrLn ("              Welcome, Player, to the BISHOP SWAP GAME!          ")
     putStrLn (printBoard _StartBoard)
+    putStrLn ("                                            Moves used so far: 0")
+    putStrLn ("                                                                 ")
     putStrLn ("Goal of the game: swap all bishops. In as few moves as possible!")
     putStrLn ("Bishops can't enter fields covered by the opposite color.")
     putStrLn ("Here you go!")
