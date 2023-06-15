@@ -2,10 +2,10 @@ module View where
 
 import System.Console.ANSI ( clearScreen )
 
-data Field = CField { gp1 :: String, gp2 :: String, gp3 :: String, gp4 :: String, gp5 :: String, gp6 :: String, gp7 :: String } deriving (Eq, Show)
+data Field = CField { gp1 :: String, gp2 :: String, gp3 :: String, gp4 :: String, gp5 :: String, gp6 :: String, gp7 :: String } deriving (Eq)
 type Row = [Field]
 type Board = [Row]
-data Game = CGame { gBoard :: Board, gScore :: Int } deriving (Eq, Show)
+data Game = CGame { gBoard :: Board, gScore :: Int } deriving (Eq)
 
 
 bb :: Field
@@ -94,7 +94,7 @@ fourthField i = head (tail (tail (tail (i))))
 
 printBoard :: Board -> String
 printBoard zzz = do
-    unlines ["                                                                 ",
+    unlines ["  ",
              "     ----------------------------------------------------------- ",
              ("    |" ++ (gp1 (firstField (firstRow zzz))) ++ (gp1 (secondField (firstRow zzz))) ++ (gp1 (thirdField (firstRow zzz))) ++ (gp1 (fourthField (firstRow zzz)))),
              ("    |" ++ (gp2 (firstField (firstRow zzz))) ++ (gp2 (secondField (firstRow zzz))) ++ (gp2 (thirdField (firstRow zzz))) ++ (gp2 (fourthField (firstRow zzz)))), 
@@ -131,19 +131,30 @@ printBoard zzz = do
              ("    |" ++ (gp5 (firstField (fifthRow zzz))) ++ (gp5 (secondField (fifthRow zzz))) ++ (gp5 (thirdField (fifthRow zzz))) ++ (gp5 (fourthField (fifthRow zzz)))), 
              ("    |" ++ (gp6 (firstField (fifthRow zzz))) ++ (gp6 (secondField (fifthRow zzz))) ++ (gp6 (thirdField (fifthRow zzz))) ++ (gp6 (fourthField (fifthRow zzz)))), 
              ("     " ++ (gp7 (firstField (fifthRow zzz))) ++ (gp7 (secondField (fifthRow zzz))) ++ (gp7 (thirdField (fifthRow zzz))) ++ (gp7 (fourthField (fifthRow zzz)))),
-             "                                                                 ", 
+             "  ", 
              "            A              B              C              D       ", 
-             "                                                                 "]
+             "  "]
+
+printLogo :: IO ()
+printLogo = readFile "banner.txt" >>= \s -> putStrLn s
 
 setup :: IO ()
 setup = do 
     clearScreen
-    putStrLn ("                                                                 ")
+    printLogo
+    putStrLn (unlines (replicate 3 "  "))
+    putStrLn "                                 Press 'enter' key to continue..."
+    putStrLn . unlines . replicate 20 $ "  "
+    getChar
+    return ()
+    clearScreen
+    putStrLn ("  ")
     putStrLn ("              Welcome, Player, to the BISHOP SWAP GAME!          ")
     putStrLn (printBoard _StartBoard)
     putStrLn ("                                            Moves used so far: 0")
-    putStrLn ("                                                                 ")
+    putStrLn ("  ")
     putStrLn ("Goal of the game: swap all bishops. In as few moves as possible!")
     putStrLn ("Bishops can't enter fields covered by the opposite color.")
     putStrLn ("Here you go!")
-    putStrLn ("                                                                 ")
+    putStrLn ("  ")
+

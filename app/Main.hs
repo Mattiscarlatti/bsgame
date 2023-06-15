@@ -67,63 +67,58 @@ printScore xzy = do
        putStrLn score
        putStrLn "                                                                 "
 
+reSetup :: Game -> World ()
+reSetup zsc = do 
+    modify (\x -> (zsc))
+    liftIO $ putStrLn (printBoard (gBoard zsc))
+    liftIO $ printScore zsc
 
 playMove :: World ()
 playMove = do
     qqq1 <- get
     choice1 <- liftIO $ chooseBishop
-    case ((evalInput1 choice1) == (Left "Invalid input.")) of 
+    case ((evalInput1 choice1) == (Left "error")) of 
        True -> do
               giveErrorMessage "Invalid input! Please, try again."
-              liftIO $ putStrLn (printBoard (gBoard qqq1))
-              liftIO $ printScore qqq1
+              reSetup qqq1
               playMove
        False -> do
-              case ((evalInput2 choice1 qqq1) == (Left "Invalid input.")) of 
+              case ((evalInput2 choice1 qqq1) == (Left "error")) of 
                   True -> do
                      giveErrorMessage "There is no bishop on this field! Please, try again."
-                     liftIO $ putStrLn (printBoard (gBoard qqq1))
-                     liftIO $ printScore qqq1
+                     reSetup qqq1
                      playMove
                   False -> do
                      sss1 <- return (chosenField choice1 (chosenRow choice1 qqq1))
                      modify (\x -> (takeBishop choice1 qqq1))
                      qqq2 <- get
                      choice2 <- liftIO $ moveBishopTo
-                     case ((evalInput1 choice2) == (Left "Invalid input.")) of 
+                     case ((evalInput1 choice2) == (Left "error")) of 
                             True -> do
                                    giveErrorMessage "Invalid input! Please, try again."
-                                   modify (\x -> (qqq1))
-                                   liftIO $ putStrLn (printBoard (gBoard qqq1))
-                                   liftIO $ printScore qqq1
+                                   reSetup qqq1
                                    playMove
                             False -> do
-                                   case ((evalInput3 choice2 qqq2) == (Left "Invalid input.")) of 
+                                   case ((evalInput3 choice2 qqq2) == (Left "error")) of 
                                        True -> do
                                           giveErrorMessage "Another Bishop on this field! Please, try again."
-                                          liftIO $ putStrLn (printBoard (gBoard qqq1))
-                                          modify (\x -> (qqq1))
-                                          liftIO $ printScore qqq1
+                                          reSetup qqq1
                                           playMove
                                        False -> do
                                           sss2 <- return (chosenField choice1 (chosenRow choice1 qqq2))
                                           modify (\x -> (positionBishop choice2 sss1 qqq2))
                                           qqq3 <- get
                                           sss3 <- return (chosenField choice2 (chosenRow choice2 qqq3))
-                                          case ((evalInput4 choice2 sss3 qqq2) == (Left "Invalid input.")) of 
+                                          case ((evalInput4 choice2 sss3 qqq2) == (Left "error")) of 
                                                  True -> do
                                                         giveErrorMessage "This field can't be accessed by this bishop! Please, try again."
-                                                        modify (\x -> (qqq1))
-                                                        liftIO $ putStrLn (printBoard (gBoard qqq1))
-                                                        liftIO $ printScore qqq1
+                                                        reSetup qqq1
                                                         playMove
                                                  False -> do
-                                                        case ((evalInput5 choice1 choice2) == (Left "Invalid input.")) of 
+                                                        case ((evalInput5 choice1 choice2) == (Left "error")) of 
                                                                True -> do
                                                                       giveErrorMessage "A bishop can only move diagonal! Please, try again."
-                                                                      modify (\x -> (qqq1))
-                                                                      liftIO $ putStrLn (printBoard (gBoard qqq1))
-                                                                      liftIO $ printScore qqq1
+                                                                      reSetup qqq1
                                                                       playMove
                                                                False -> do
                                                                       modify (\x -> (positionBishop choice2 sss1 qqq3))
