@@ -30,16 +30,6 @@
   (major1) == 4 && (major2) <  14 || \
   (major1) == 4 && (major2) == 14 && (minor) <= 3)
 #endif /* MIN_VERSION_base */
-/* package free-5.2 */
-#ifndef VERSION_free
-#define VERSION_free "5.2"
-#endif /* VERSION_free */
-#ifndef MIN_VERSION_free
-#define MIN_VERSION_free(major1,major2,minor) (\
-  (major1) <  5 || \
-  (major1) == 5 && (major2) <  2 || \
-  (major1) == 5 && (major2) == 2 && (minor) <= 0)
-#endif /* MIN_VERSION_free */
 /* package mtl-2.2.2 */
 #ifndef VERSION_mtl
 #define VERSION_mtl "2.2.2"

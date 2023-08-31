@@ -59,7 +59,7 @@ executable bsgame
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base, mtl, free, ansi-terminal, transformers
+    build-depends:    base, mtl, ansi-terminal, transformers
 
     -- Directories containing source files.
     hs-source-dirs:   app

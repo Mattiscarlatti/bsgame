@@ -8,6 +8,23 @@ import Control.Monad.State ( State, StateT, runState, runStateT, liftIO, MonadSt
 import Control.Monad.Trans.Except ( ExceptT, runExceptT )
 
 import View
+    ( bb,
+      be,
+      bw,
+      fifthRow,
+      firstField,
+      firstRow,
+      fourthField,
+      fourthRow,
+      secondField,
+      secondRow,
+      thirdField,
+      thirdRow,
+      wb,
+      we,
+      ww,
+      Field,
+      Game(gBoard) )
 
 type Error = String
 type World a = StateT Game (ExceptT Error IO) a
@@ -162,7 +179,7 @@ evalInput5 mn nm = do
                             '4' -> case head (mn) of 
                                    'A' -> if (((fmap  toUpper nm) == "B3") || ((fmap  toUpper nm) == "B5") || ((fmap  toUpper nm) == "C2") || ((fmap  toUpper nm) == "D1")) then Right "OK" else Left "error"
                                    'B' -> if (((fmap  toUpper nm) == "A3") || ((fmap  toUpper nm) == "A5") || ((fmap  toUpper nm) == "C3") || ((fmap  toUpper nm) == "C5") || ((fmap  toUpper nm) == "D2")) then Right "OK" else Left "error"
-                                   'C' -> if (((fmap  toUpper nm) == "A2") || ((fmap  toUpper nm) == "B3") || ((fmap  toUpper nm) == "B5") || ((fmap  toUpper nm) == "C3") || ((fmap  toUpper nm) == "C5")) then Right "OK" else Left "error"
+                                   'C' -> if (((fmap  toUpper nm) == "A2") || ((fmap  toUpper nm) == "B3") || ((fmap  toUpper nm) == "B5") || ((fmap  toUpper nm) == "D3") || ((fmap  toUpper nm) == "D5")) then Right "OK" else Left "error"
                                    'D' -> if (((fmap  toUpper nm) == "A1") || ((fmap  toUpper nm) == "B2") || ((fmap  toUpper nm) == "C3") || ((fmap  toUpper nm) == "C5")) then Right "OK" else Left "error"
                             '5' -> case head (mn) of 
                                    'A' -> if (((fmap  toUpper nm) == "B4") || ((fmap  toUpper nm) == "C3") || ((fmap  toUpper nm) == "D2")) then Right "OK" else Left "error"

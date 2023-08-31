@@ -1,0 +1,6 @@
+{
+    "problems.decorations.enabled": true,
+    "outline.problems.badges": true,
+    "outline.problems.colors": true,
+    "outline.problems.enabled": true
+}
